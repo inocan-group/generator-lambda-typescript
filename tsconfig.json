@@ -1,0 +1,11 @@
+{
+  "compileOptions": {
+    "declaration": false,
+    "module": "commonjs",
+    "target": "es2020",
+    "moduleResolution": "node",
+    "sourceMap": false,
+    "outDir": "./generators/app"
+  },
+  "include": ["src/**/*"]
+}

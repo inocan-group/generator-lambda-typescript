@@ -1,0 +1,58 @@
+{
+  "name": "generator-lambda-typescript",
+  "version": "0.1.0",
+  "description": "A template for using AWS Lambda in Typescript with Opinionated Tools",
+  "main": "generators/app/index.js",
+  "files": [
+    "generators"
+  ],
+  "scripts": {
+    "build": "run-p build:*",
+    "build:templates": "sync-glob templates/** 'generators/app/templates'",
+    "build:tsc": "tsc",
+    "watch": "run-p  watch:*",
+    "watch:templates": "sync-glob --watch 'templates/**' 'generators/app/templates'",
+    "watch:tsc": "tsc -w",
+    "test": "node_modules/.bin/tsc && node_modules/.bin/mocha --exit --require ts-node/register test/test-app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/inocan-group/generator-lambda-typescript.git"
+  },
+  "keywords": [
+    "typescript",
+    "lambda",
+    "aws",
+    "yeoman"
+  ],
+  "author": "Ken Snyder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inocan-group/generator-lambda-typescript/issues"
+  },
+  "homepage": "https://github.com/inocan-group/generator-lambda-typescript#readme",
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/yeoman-generator": "^3.1.4",
+    "@types/yeoman-test": "^2.0.4",
+    "chai": "^4.2.0",
+    "do-devops": "^0.3.8",
+    "mocha": "^7.2.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.3",
+    "yeoman-test": "^2.6.0"
+  },
+  "dependencies": {
+    "async-shelljs": "^0.1.4",
+    "chalk": "^4.0.0",
+    "common-types": "^1.14.4",
+    "handlebars": "^4.7.6",
+    "inquirer": "^7.1.0",
+    "sync-glob": "^1.4.0",
+    "yeoman-generator": "^4.10.1",
+    "yosay": "^2.0.2"
+  }
+}
