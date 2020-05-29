@@ -12,8 +12,7 @@ export class Generator extends Base {
 
   initializing() {
     console.log(computerText);
-
-    console.log(chalk`Starting the {green Lambda Typescript} generator (for AWS functions with attitude)`);
+    console.log(chalk`\nStarting the {green Lambda Typescript} generator. {italic For AWS functions with attitude!}\n`);
   }
 
   install() {
