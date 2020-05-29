@@ -1,4 +1,4 @@
-import { IGenerator } from "../index";
+import { Generator } from "../index";
 
 //#region dev-deps
 const typings = ["@types/aws-sdk", "@types/lodash", "@types/rimraf", "@types/handlebars"];
@@ -19,7 +19,7 @@ const serverlessDeps = ["aws-orchestrate", "aws-log", "aws-ssm"];
 const firebaseDeps = ["universal-fire", "firemodel"];
 //#endregion
 
-export function install(ctx: IGenerator) {
+export function install(ctx: Generator) {
   const devDeps = [...typings, ...serverlessDevDeps, ...webpackRelated, ...testingDevDeps, ...otherDevDeps];
   ctx.yarnInstall(devDeps, { dev: true });
   const deps = [...utilityDeps, ...serverlessDeps, ...firebaseDeps];

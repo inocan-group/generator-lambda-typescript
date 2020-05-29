@@ -1,9 +1,7 @@
-import * as Base from "yeoman-generator";
-import * as chalk from "chalk";
-
 import { computerText, install } from "./index";
 
-export type IGenerator = Base;
+import Base from "yeoman-generator";
+import chalk from "chalk";
 
 export class Generator extends Base {
   constructor(args: any[], opts: any) {

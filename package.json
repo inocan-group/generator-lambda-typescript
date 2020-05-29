@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "A template for using AWS Lambda in Typescript with Opinionated Tools",
   "main": "generators/app/index.js",
+  "type": "commonjs",
   "files": [
     "generators"
   ],
@@ -13,7 +14,8 @@
     "watch": "run-p  watch:*",
     "watch:templates": "sync-glob --watch 'templates/**' 'generators/app/templates'",
     "watch:tsc": "tsc -P tsconfig.cjs.json -w",
-    "test": "do test"
+    "test": "do test",
+    "autoindex": "yarn do autoindex"
   },
   "repository": {
     "type": "git",
@@ -32,6 +34,7 @@
   },
   "homepage": "https://github.com/inocan-group/generator-lambda-typescript#readme",
   "devDependencies": {
+    "@rollup/plugin-typescript": "^4.1.2",
     "@types/chalk": "^2.2.0",
     "@types/yeoman-generator": "^3.1.4",
     "@types/yeoman-test": "^2.0.4",
@@ -41,6 +44,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
+    "rollup": "^2.11.2",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.3",
     "yeoman-test": "^2.6.0"

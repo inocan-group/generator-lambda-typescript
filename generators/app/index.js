@@ -1,19 +1,64 @@
-"use strict";
-// #autoindex:named
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-//#region autoindexed files
-// indexed at: 5th May, 2020, 09:05 PM ( GMT-7 )
-__exportStar(require("./Generator"), exports);
-__exportStar(require("./lifecycle-hooks/index"), exports);
-__exportStar(require("./shared/index"), exports);
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var Base = require('yeoman-generator');
+var chalk = require('chalk');
+
+class Generator extends Base {
+    constructor(args, opts) {
+        super(args, opts);
+    }
+    initializing() {
+        console.log(computerText);
+        console.log(chalk `\nStarting the {green Lambda Typescript} generator. {italic For AWS functions with attitude!}\n`);
+    }
+    install() {
+        install(this);
+    }
+}
+
+//#region dev-deps
+const typings = ["@types/aws-sdk", "@types/lodash", "@types/rimraf", "@types/handlebars"];
+const serverlessDevDeps = [
+    "serverless",
+    "serverless-pseudo-parameters",
+    "serverless-step-functions",
+    "serverless-log-forwarding",
+];
+const webpackRelated = ["webpack", "webpack-bundle-analyzer", "webpack-cli"];
+const testingDevDeps = ["mocha", "chai", "@types/mocha", "@types/chai"];
+const otherDevDeps = ["js-yaml", "do-devops", "typescript", "ts-node", "eslint", "rimraf", "chalk", "netlify", "madge"];
 //#endregion
+//#region deps
+const utilityDeps = ["date-fns", "common-types"];
+const serverlessDeps = ["aws-orchestrate", "aws-log", "aws-ssm"];
+const firebaseDeps = ["universal-fire", "firemodel"];
+//#endregion
+function install(ctx) {
+    const devDeps = [...typings, ...serverlessDevDeps, ...webpackRelated, ...testingDevDeps, ...otherDevDeps];
+    ctx.yarnInstall(devDeps, { dev: true });
+    const deps = [...utilityDeps, ...serverlessDeps, ...firebaseDeps];
+    ctx.yarnInstall(deps, { dev: false });
+}
+
+const computerText = `
+┌──────────────────────┐
+│......................│
+│......................│
+│......................│
+│......................│
+│......................│
+│......................│
+│......................│
+│......................│
+└──────────────────────┘
+ **********************
+***                  ***
+**              *******
+****************\n`;
+
+exports.Generator = Generator;
+exports.computerText = computerText;
+exports.install = install;
+//# sourceMappingURL=index.js.map
