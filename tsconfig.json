@@ -1,11 +1,13 @@
 {
-  "compileOptions": {
+  "compilerOptions": {
     "declaration": false,
     "module": "commonjs",
-    "target": "es2020",
+    "lib": [],
+    "target": "es2015",
     "moduleResolution": "node",
     "sourceMap": false,
-    "outDir": "./generators/app"
+    "outDir": "./generators/app",
+    "noEmit": true
   },
   "include": ["src/**/*"]
 }

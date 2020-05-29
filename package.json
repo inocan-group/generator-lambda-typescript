@@ -9,11 +9,11 @@
   "scripts": {
     "build": "run-p build:*",
     "build:templates": "sync-glob templates/** 'generators/app/templates'",
-    "build:tsc": "tsc",
+    "build:tsc": "tsc -P tsconfig.cjs.json",
     "watch": "run-p  watch:*",
     "watch:templates": "sync-glob --watch 'templates/**' 'generators/app/templates'",
-    "watch:tsc": "tsc -w",
-    "test": "node_modules/.bin/tsc && node_modules/.bin/mocha --exit --require ts-node/register test/test-app.ts"
+    "watch:tsc": "tsc -P tsconfig.cjs.json -w",
+    "test": "do test"
   },
   "repository": {
     "type": "git",
