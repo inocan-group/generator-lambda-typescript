@@ -12,12 +12,9 @@ const serverlessDevDeps = [
 const webpackRelated = ["webpack", "webpack-bundle-analyzer", "webpack-cli"];
 const testingDevDeps = ["mocha", "chai", "@types/mocha", "@types/chai"];
 const otherDevDeps = ["js-yaml", "do-devops", "typescript", "ts-node", "eslint", "rimraf", "chalk", "netlify", "madge"];
-//#endregion
-//#region deps
 const utilityDeps = ["date-fns", "common-types"];
 const serverlessDeps = ["aws-orchestrate", "aws-log", "aws-ssm"];
 const firebaseDeps = ["universal-fire", "firemodel"];
-//#endregion
 
 const computerText = `
 ┌──────────────────────┐
@@ -35,7 +32,7 @@ const computerText = `
 **              *******
 ****************\n`;
 
-class Generator extends Base {
+module.exports = class extends Base {
   constructor(args, opts) {
     super(args, opts);
   }
@@ -49,11 +46,4 @@ class Generator extends Base {
     const deps = [...utilityDeps, ...serverlessDeps, ...firebaseDeps];
     ctx.yarnInstall(deps, { dev: false });
   }
-}
-
-//#region dev-deps
-
-exports.Generator = Generator;
-exports.computerText = computerText;
-exports.install = install;
-//# sourceMappingURL=index.js.map
+};
