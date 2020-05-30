@@ -32,7 +32,7 @@ const computerText = `
 **              *******
 ****************\n`;
 
-module.exports = class extends Base {
+module.exports.default = class extends Base {
   constructor(args, opts) {
     super(args, opts);
   }
