@@ -1398,7 +1398,7 @@ commander@^5.1.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
   integrity sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==
 
-common-types@^1.12.12, common-types@^1.14.2, common-types@^1.14.4:
+common-types@^1.12.12, common-types@^1.14.4:
   version "1.14.4"
   resolved "https://registry.yarnpkg.com/common-types/-/common-types-1.14.4.tgz#8bb5b597da95143e3cbfe5e833a60faddebbb4c6"
   integrity sha512-nUD0qv/xzWDzr+Wii+X8llLa99tYCPCWwFv7Is+DafytIjJsGchygf0Tgz9T2mHh1NhmEQ3jkOBU0CVyYWmrZQ==
@@ -1829,10 +1829,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-do-devops@^0.3.8:
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/do-devops/-/do-devops-0.3.8.tgz#0b784d319efcbd79d1038321123af5583e3debe2"
-  integrity sha512-Z4DS9eqm+JBghwUhVVZ2Mg67N+vGWgqTkt0Y6veV8+V7kMofbqE2CtRaq7k2ln2SF8MMzIL8MGtHJdkaNLWdaQ==
+do-devops@^0.3.9:
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/do-devops/-/do-devops-0.3.9.tgz#a8005e0900740323d890727be2d03e99d72a2501"
+  integrity sha512-VmgIOZS5eIo+rrVSBSFVgEAC9WBY00Qy19ke25tX1Km3frvKf1xDKO8Rb0roDRrj8d47bvG8QJirU8PMGsg8UQ==
   dependencies:
     "@types/command-line-args" "^5.0.0"
     "@types/command-line-usage" "^5.0.1"
@@ -1845,14 +1845,14 @@ do-devops@^0.3.8:
     chalk "^4.0.0"
     command-line-args "^5.1.1"
     command-line-usage "^6.0.2"
-    common-types "^1.14.2"
+    common-types "^1.14.4"
     date-fns "^2.14.0"
     fast-glob "^3.2.2"
     globby "^11.0.0"
     inquirer "^6.5.1"
     js-yaml "^3.13.1"
     lodash.get "^4.4.2"
-    madge "^3.8.0"
+    madge "^3.9.0"
     matcher "^2.0.0"
     play-sound "^1.1.3"
     recast "^0.19.0"
@@ -3577,7 +3577,7 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-madge@^3.8.0:
+madge@^3.9.0:
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/madge/-/madge-3.9.0.tgz#7bcc6d6265e88049685cb5bb075cd1b16b90fcf5"
   integrity sha512-ABR2ZTFga+TPLzlu2u46lcv8WwOzoI6VMTMqe3DyaY0igzyGpXiOIH1vAtziSKC4UHuyTpwkfhjWN5qOYR/5OA==
