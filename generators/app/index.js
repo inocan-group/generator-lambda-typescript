@@ -32,7 +32,9 @@ const computerText = `
 **              *******
 ****************\n`;
 
-module.exports = class extends Base {
+module.exports = Generator;
+
+class Generator extends Base {
   constructor(args, opts) {
     super(args, opts);
   }
@@ -46,4 +48,4 @@ module.exports = class extends Base {
     const deps = [...utilityDeps, ...serverlessDeps, ...firebaseDeps];
     ctx.yarnInstall(deps, { dev: false });
   }
-};
+}
