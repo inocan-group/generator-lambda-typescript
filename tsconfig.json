@@ -6,7 +6,6 @@
     "moduleResolution": "node",
     "sourceMap": false,
     "outDir": "./generators/app",
-    "allowSyntheticDefaultImports": true,
     "noEmit": true
   },
   "include": ["src/**/*"]
