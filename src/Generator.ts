@@ -1,4 +1,4 @@
-import { computerText, install } from "./index";
+import { computerText, install } from "./private";
 
 import Base from "yeoman-generator";
 import chalk from "chalk";
