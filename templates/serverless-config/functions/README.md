@@ -1,0 +1,3 @@
+# Lambda Functions
+
+The configuration of Lambda functions is critical but pretty much automatic. This folder has an `index.ts` which exports the full list of functions but unless you have a strong edge case you won't have to touch this folder because the `inline.ts` will automatically be updated with your serverless configuration when you run the `yarn prep` (you can also use `yarn build` ... same difference). This command will go through all the steps needed to ensure that the `serverless.yml` file is configured correctly and this includes rebuilding the list of Lambda functions.

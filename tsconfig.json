@@ -6,7 +6,9 @@
     "moduleResolution": "node",
     "sourceMap": false,
     "outDir": "./generators/app",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "noEmit": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*.ts"]
 }

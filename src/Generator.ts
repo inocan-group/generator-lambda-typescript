@@ -1,7 +1,7 @@
 import * as YeomanGenerator from "yeoman-generator";
 import * as chalk from "chalk";
 
-import { askAboutTesting, askForProjectName, computerText, install } from "./private";
+import { closure, computerText, install, prompting, writing } from "./private";
 
 export class Generator extends YeomanGenerator {
   constructor(args: any[], opts: any) {
@@ -10,16 +10,22 @@ export class Generator extends YeomanGenerator {
 
   async initializing() {
     console.log(computerText);
-    console.log(chalk`\nStarting the {green Lambda Typescript} generator. {italic For AWS functions with attitude!}\n`);
-    const answers = await this.prompt([
-      askForProjectName(this.config.getAll()),
-      ...askAboutTesting(this.config.getAll()),
-    ]);
-    Object.keys(answers).forEach((key) => this.config.set(key, answers[key]));
-    this.config.save();
+    console.log(chalk`\nStarting the {green Lambda Typescript} generator. {italic AWS functions with attitude!}\n`);
   }
 
-  install() {
-    install(this);
+  async prompting() {
+    await prompting(this);
+  }
+
+  async writing() {
+    await writing(this);
+  }
+
+  async install() {
+    await install(this);
+  }
+
+  async end() {
+    await closure(this);
   }
 }

@@ -1,15 +1,13 @@
 // #autoindex:named
 
 //#region autoindexed files
-// indexed at: 5th May, 2020, 08:17 PM ( GMT-7 )
+// indexed at: 5th May, 2020, 10:35 PM ( GMT-7 )
 export * from "./computer-text";
+export * from "./copyDirectory";
+export * from "./copyTplDirectory";
+export * from "./getTransientState";
 export * from "./inputQuestion";
 export * from "./listQuestion";
+export * from "./repoUrl";
+export * from "./setTransientState";
 //#endregion
-
-
-
-
-
-
-

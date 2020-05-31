@@ -12,7 +12,10 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 //#region autoindexed files
-// indexed at: 5th May, 2020, 08:17 PM ( GMT-7 )
+// indexed at: 5th May, 2020, 10:30 PM ( GMT-7 )
+__exportStar(require("./closure"), exports);
 __exportStar(require("./install"), exports);
-__exportStar(require("./questions/index"), exports);
+__exportStar(require("./prompting"), exports);
+__exportStar(require("./writing"), exports);
+__exportStar(require("./writing/index"), exports);
 //#endregion

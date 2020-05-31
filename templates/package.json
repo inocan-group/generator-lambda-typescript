@@ -1,0 +1,36 @@
+{
+  "name": "<%= serviceName %>",
+  "version": "0.1.0",
+  "description": "<%= serviceDescription %>",
+  "license": "<%= license %>",
+  "repository": "<%= repoUrl %>",
+  "keywords": [
+    "typescript",
+    "lambda",
+    "aws",
+    "yeoman"
+  ],
+  "scripts": {
+    "prep": "yarn do build",
+    "build": "yarn do build",
+    "fns": "yarn do fns",
+    "ssm": "yarn do ssm",
+    "autoindex": "yarn do autoindex",
+    "test": "yarn do test ",
+    "invoke": "yarn do invoke ",
+    "deploy": "yarn do deploy ",
+    "analyze": "echo Running Webpack Analyzer cross-env NODE_ENV=production BUNDLE_ANALYZE=true yarn webpack ",
+    "package": "yarn do pkg",
+    "info": "yarn do info",
+    "help": "yarn do --help",
+    "coverage:coveralls": "nyc --reporter=text-lcov _mocha -r ts-node/register 'test/**/*-spec.ts' | coveralls",
+    "coverage:codecov": "nyc _mocha --reporter=json -r ts-node/register 'test/**/*-spec.ts' > coverage/coverage.json",
+    "watch": "webpack -w"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.42"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}

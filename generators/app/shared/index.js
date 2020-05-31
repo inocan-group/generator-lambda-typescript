@@ -12,8 +12,13 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 //#region autoindexed files
-// indexed at: 5th May, 2020, 08:17 PM ( GMT-7 )
+// indexed at: 5th May, 2020, 10:35 PM ( GMT-7 )
 __exportStar(require("./computer-text"), exports);
+__exportStar(require("./copyDirectory"), exports);
+__exportStar(require("./copyTplDirectory"), exports);
+__exportStar(require("./getTransientState"), exports);
 __exportStar(require("./inputQuestion"), exports);
 __exportStar(require("./listQuestion"), exports);
+__exportStar(require("./repoUrl"), exports);
+__exportStar(require("./setTransientState"), exports);
 //#endregion
