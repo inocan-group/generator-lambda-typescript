@@ -1,6 +1,6 @@
 {
   "name": "generator-lambda-typescript",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "A template for using AWS Lambda in Typescript with Opinionated Tools",
   "main": "generators/app/index.js",
   "type": "commonjs",
@@ -8,11 +8,13 @@
     "generators"
   ],
   "scripts": {
-    "build": "run-p build:*",
-    "build:autoindex": "yarn autoindex",
-    "build:templates": "sync-glob templates generators/app/templates/ -d -s",
-    "build:tsc": "tsc -P tsconfig.cjs.json",
-    "localDeploy": "yarn build && sync-glob ./generators /usr/local/lib/node_modules/generator-lambda-typescript/generators",
+    "build": "run-s build:autoindex build:tsc build:templates",
+    "build:autoindex": "echo Autoindexing ... && yarn autoindex",
+    "build:templates": "echo Copying templates into place && sync-glob templates generators/app/templates/ -d -s",
+    "build:tsc": "echo Transpiling Typescript && tsc -P tsconfig.cjs.json",
+    "deploy": "run-s build:autoindex build:tsc build:templates",
+    "deploy:local": "run-s build syncToLocal",
+    "syncToLocal": "echo 'Copying files to /usr/local/lib' && sync-glob ./generators /usr/local/lib/node_modules/generator-lambda-typescript/generators -s -d",
     "watch": "run-p watch:*",
     "watch:templates": "sync-glob --watch 'templates' 'generators/app/templates'",
     "watch:tsc": "tsc -P tsconfig.cjs.json -w",
@@ -41,6 +43,7 @@
     "@types/globby": "^9.1.0",
     "@types/yeoman-generator": "^3.1.4",
     "@types/yeoman-test": "^2.0.4",
+    "@types/yosay": "^0.0.29",
     "chai": "^4.2.0",
     "mocha": "^7.2.0",
     "npm-run-all": "^4.1.5",
@@ -60,6 +63,7 @@
     "do-devops": "^0.3.9",
     "globby": "^11.0.0",
     "inquirer": "^7.1.0",
+    "simple-git": "^2.5.0",
     "yeoman-generator": "^4.10.1",
     "yosay": "^2.0.2"
   }

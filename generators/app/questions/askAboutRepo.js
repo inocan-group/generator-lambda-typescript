@@ -36,7 +36,7 @@ function askAboutRepo(defaults) {
         }),
         private_1.inputQuestion({
             name: "repoUrl",
-            message: "Please valid that this is the right URL for your repo",
+            message: "Please validate that this is the right URL for your repo",
             default: (current) => do_devops_1.getPackageJson().repository ? do_devops_1.getPackageJson().repository : private_1.repoUrl(Object.assign(Object.assign({}, defaults), current)),
             when: true,
         }),

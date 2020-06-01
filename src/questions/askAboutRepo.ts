@@ -43,7 +43,7 @@ export function askAboutRepo(defaults: IDictionary) {
     }),
     inputQuestion({
       name: "repoUrl",
-      message: "Please valid that this is the right URL for your repo",
+      message: "Please validate that this is the right URL for your repo",
       default: (current: IDictionary) =>
         getPackageJson().repository ? getPackageJson().repository : repoUrl({ ...defaults, ...current }),
       when: true,

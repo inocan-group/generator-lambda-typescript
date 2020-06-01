@@ -1,7 +1,8 @@
 import { AWS_REGIONS, IDictionary } from "common-types";
+import { IAwsProfile, confirmQuestion } from "do-devops";
 import { inputQuestion, listQuestion } from "../private";
 
-import { IAwsProfile } from "do-devops/bin";
+import chalk = require("chalk");
 
 export function askAboutAws(defaults: IDictionary, profiles: IDictionary<IAwsProfile>) {
   const profileNames = Object.keys(profiles);
@@ -20,9 +21,22 @@ export function askAboutAws(defaults: IDictionary, profiles: IDictionary<IAwsPro
       default: (current: IDictionary) => (current.repoType === "core-services" ? current.serviceName : undefined),
       when: (current) => !defaults.awsProfile && current.repoType === "core-services",
     }),
+    // Profile is not defined in user's credentials file
+    confirmQuestion({
+      name: "__addMissingCredentials",
+      message: (current) =>
+        chalk`You don't currently have the profile "${current.awsProfile}" in your credentials file,\ndo you have the {italic access} and {italic secret key} available? If so we can add it to your file\nfor you.`,
+      when: (current) => !profileNames.includes(current.awsProfile),
+    }),
     inputQuestion({
-      name: "__hasAwsCredentials",
-      message: "",
+      name: "__awsAccessKey",
+      message: "input your AWS access key:",
+      when: (current) => current.__addMissingCredentials,
+    }),
+    inputQuestion({
+      name: "__awsSecretKey",
+      message: "input your AWS secret access key (this will not be saved except your own credentials file):",
+      when: (current) => current.__addMissingCredentials,
     }),
     listQuestion({
       name: "awsRegion",
@@ -41,16 +55,16 @@ export function askAboutAws(defaults: IDictionary, profiles: IDictionary<IAwsPro
     // }),
     inputQuestion({
       name: "_awsProfile",
-      message: `Library/utility repos are often deployed into different environments so having\na default profile and region saved in the repo doesn't make sense but in some cases\nit's valuable to have  :`,
+      message: `Library/utility repos are often deployed into different environments so we\n will not save a default AWS Profile and Region into the repo but we can save it into ".yo-transient.json" for you\nwhich makes it a default for this cloning of the repo but no others.\nLeave it blank if you do not want this default behavior at all:`,
       default: defaults.serviceName,
-      when: (current) => !defaults.awsProfile || current.repoType === "utility-library",
+      when: (current) => !defaults.awsProfile && current.repoType === "utility-library",
     }),
     listQuestion({
       name: "_awsRegion",
       message: "What AWS region do you want to associate as your default region?",
       choices: AWS_REGIONS,
       default: defaults.awsRegion || "us-east-1",
-      when: (current) => !defaults.awsRegion || current.repoType === "utility-library",
+      when: (current) => !defaults.awsRegion && current.repoType === "utility-library",
     }),
   ];
 }
