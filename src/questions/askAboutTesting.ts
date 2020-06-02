@@ -11,6 +11,7 @@ export function askAboutTesting(defaults: IDictionary) {
       choices: [UnitTestFramework.mocha, UnitTestFramework.jest, UnitTestFramework.other],
       default: () =>
         defaults.unitTesting ? defaults.unitTesting : hasDevDependency("jest") ? "jest" : UnitTestFramework.mocha,
+      when: !defaults.unitTesting,
     }),
     listQuestion({
       name: "testFilePattern",

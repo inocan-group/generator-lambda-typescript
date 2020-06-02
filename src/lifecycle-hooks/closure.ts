@@ -41,5 +41,5 @@ export async function closure(ctx: Generator) {
     console.log(chalk`- anyway, outside of the {bold git} fumble, all else is well :)`);
   }
 
-  console.log(yosay(`\n${chalk.bold("Success!")}\nType "yarn help" for CLI help.`));
+  console.log(yosay(chalk`\n{green {bold Success!}}\nType "yarn do" for CLI help.`));
 }

@@ -1,7 +1,6 @@
 import { IDictionary, IPackageJson } from "common-types";
 import { License, inputQuestion, listQuestion, repoUrl } from "../private";
-
-import { getPackageJson } from "do-devops";
+import { getFileFromHomeDirectory, getPackageJson } from "do-devops";
 
 export const enum GitHost {
   github = "github",
@@ -10,7 +9,12 @@ export const enum GitHost {
   other = "other",
 }
 
+export const USER_REPO_ORGS = ".repo-orgs.json";
+
 export function askAboutRepo(defaults: IDictionary) {
+  const userFile = getFileFromHomeDirectory(USER_REPO_ORGS, true);
+  const userOrgs = userFile ? JSON.parse(userFile) : [];
+
   return [
     listQuestion({
       name: "repoHost",
@@ -35,18 +39,24 @@ export function askAboutRepo(defaults: IDictionary) {
       },
       when: !defaults.repoHost,
     }),
-    inputQuestion({
+    listQuestion({
       name: "repoOrg",
       message: "What organization/group will your repo be under:",
+      choices: userOrgs.concat("OTHER"),
+      when: !defaults.repoOrg && userOrgs.length > 0,
+    }),
+    inputQuestion({
+      name: "repoOrg",
+      message: `What organization/group will your repo be under:`,
       default: defaults.repoOrg,
-      when: !defaults.repoOrg,
+      when: (current) => !defaults.repoOrg && (!current.repoOrg || current.repoOrg === "OTHER"),
     }),
     inputQuestion({
       name: "repoUrl",
       message: "Please validate that this is the right URL for your repo",
       default: (current: IDictionary) =>
         getPackageJson().repository ? getPackageJson().repository : repoUrl({ ...defaults, ...current }),
-      when: true,
+      when: (current) => current.repoOrg !== defaults.repoOrg || current.repoHost !== defaults.repoHost,
     }),
   ];
 }

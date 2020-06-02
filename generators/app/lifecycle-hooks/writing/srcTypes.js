@@ -9,22 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.writing = void 0;
-const private_1 = require("../private");
-const shared_1 = require("../shared");
-function writing(ctx) {
+exports.srcTypes = void 0;
+const private_1 = require("../../private");
+function srcTypes(ctx, firstTime) {
     return __awaiter(this, void 0, void 0, function* () {
-        const firstTime = !shared_1.destinationExists(ctx, "src/handlers");
-        return Promise.all([
-            private_1.rootConfig(ctx),
-            // SRC
-            private_1.srcHandlers(ctx, firstTime),
-            private_1.srcModels(ctx, firstTime),
-            private_1.srcShared(ctx, firstTime),
-            private_1.srcTypes(ctx, firstTime),
-            // SERVERLESS CONFIG
-            private_1.serverlessStaticConfig(ctx),
-        ]);
+        if (firstTime) {
+            yield private_1.copyDirectory(ctx, "src/@types");
+        }
     });
 }
-exports.writing = writing;
+exports.srcTypes = srcTypes;

@@ -16,6 +16,9 @@ function srcModels(ctx, firstTime) {
         if (firstTime) {
             yield private_1.copyDirectory(ctx, "src/models");
         }
+        if (!private_1.destinationExists(ctx, "src/shared")) {
+            private_1.copyFile(ctx, "src/shared/README.md");
+        }
     });
 }
 exports.srcModels = srcModels;

@@ -16,6 +16,9 @@ function srcHandlers(ctx, firstTime) {
         if (firstTime) {
             yield private_1.copyDirectory(ctx, "src/handlers");
         }
+        else {
+            private_1.copyFile(ctx, "src/handlers/README.md");
+        }
     });
 }
 exports.srcHandlers = srcHandlers;

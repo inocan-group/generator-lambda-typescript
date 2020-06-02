@@ -15,5 +15,6 @@ export function askAboutDatabase(defaults: IDictionary) {
     message: "What database technology will you use (as your primary source):",
     choices: [DbTech.rtdb, DbTech.firestore, DbTech.dynamodb, DbTech.other],
     default: defaults.database || DbTech.rtdb,
+    when: !defaults.database,
   });
 }

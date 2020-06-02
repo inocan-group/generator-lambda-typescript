@@ -8,9 +8,17 @@ import {
   getTransientState,
   setTransientState,
 } from "../private";
-import { IAwsProfile, addAwsProfile, confirmQuestion, getAwsIdentityFromProfile } from "do-devops";
+import {
+  IAwsProfile,
+  addAwsProfile,
+  confirmQuestion,
+  getAwsIdentityFromProfile,
+  getFileFromHomeDirectory,
+  saveFileToHomeDirectory,
+} from "do-devops";
+import { USER_REPO_ORGS, askAboutAws } from "../questions";
 
-import { askAboutAws } from "../questions";
+import { IDictionary } from "common-types";
 import { getAwsProfileList } from "do-devops";
 
 import chalk = require("chalk");
@@ -30,17 +38,17 @@ export async function prompting(ctx: Generator) {
   // save repo-state
   Object.keys(answers)
     .filter((k) => k.slice(0, 1) != "_")
-    .forEach((k) => ctx.config.set(k, answers[k]));
+    .forEach((k) => ctx.config.set(k, transformValue(answers, k)));
   ctx.config.save();
 
   // save transient state
   const transient = getTransientState();
   Object.keys(answers)
     .filter((k) => k.slice(0, 1) === "_" && k.slice(1, 2) !== "_")
-    .forEach((k) => (transient[k] = answers[k]));
+    .forEach((k) => (transient[k] = transformValue(answers, k)));
   setTransientState(transient);
 
-  // special ops
+  // special ops: set profile
   if (answers.__awsAccessKey && answers.__awsSecretKey && answers.awsProfile) {
     const profile: IAwsProfile = {
       aws_access_key_id: answers.__awsAccessKey,
@@ -70,4 +78,26 @@ export async function prompting(ctx: Generator) {
       }
     }
   }
+
+  // special ops: save customer repos
+  const currentUserRepos = getFileFromHomeDirectory(USER_REPO_ORGS, true);
+  if (!currentUserRepos || JSON.parse(currentUserRepos).includes(answers.repoOrg)) {
+    const current = currentUserRepos ? JSON.parse(currentUserRepos) : [];
+    saveFileToHomeDirectory(USER_REPO_ORGS, JSON.stringify(current.concat(answers.repoOrg)));
+  }
+}
+
+const conversions: IDictionary = {
+  _awsProfile: {
+    NONE: "",
+  },
+  _awsRegion: {
+    "NO DEFAULT": "",
+  },
+};
+
+function transformValue<T extends IDictionary>(answers: T, key: keyof T & string) {
+  return conversions[key] && conversions[key][answers[key]] !== undefined
+    ? conversions[key][answers[key]]
+    : answers[key];
 }

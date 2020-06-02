@@ -1,9 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.askAboutRepo = void 0;
+exports.askAboutRepo = exports.USER_REPO_ORGS = void 0;
 const private_1 = require("../private");
 const do_devops_1 = require("do-devops");
+exports.USER_REPO_ORGS = ".repo-orgs.json";
 function askAboutRepo(defaults) {
+    const userFile = do_devops_1.getFileFromHomeDirectory(exports.USER_REPO_ORGS, true);
+    const userOrgs = userFile ? JSON.parse(userFile) : [];
     return [
         private_1.listQuestion({
             name: "repoHost",
@@ -28,17 +31,23 @@ function askAboutRepo(defaults) {
             },
             when: !defaults.repoHost,
         }),
-        private_1.inputQuestion({
+        private_1.listQuestion({
             name: "repoOrg",
             message: "What organization/group will your repo be under:",
+            choices: userOrgs.concat("OTHER"),
+            when: !defaults.repoOrg && userOrgs.length > 0,
+        }),
+        private_1.inputQuestion({
+            name: "repoOrg",
+            message: `What organization/group will your repo be under:`,
             default: defaults.repoOrg,
-            when: !defaults.repoOrg,
+            when: (current) => !defaults.repoOrg && (!current.repoOrg || current.repoOrg === "OTHER"),
         }),
         private_1.inputQuestion({
             name: "repoUrl",
             message: "Please validate that this is the right URL for your repo",
             default: (current) => do_devops_1.getPackageJson().repository ? do_devops_1.getPackageJson().repository : private_1.repoUrl(Object.assign(Object.assign({}, defaults), current)),
-            when: true,
+            when: (current) => current.repoOrg !== defaults.repoOrg || current.repoHost !== defaults.repoHost,
         }),
     ];
 }

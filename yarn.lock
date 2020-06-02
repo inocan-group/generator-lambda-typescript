@@ -1422,10 +1422,10 @@ common-types@^1.12.12, common-types@^1.14.4:
   dependencies:
     "@types/json-schema" "^7.0.4"
 
-common-types@^1.14.8:
-  version "1.14.8"
-  resolved "https://registry.yarnpkg.com/common-types/-/common-types-1.14.8.tgz#80901576736dc3be85290483dcdfc3f0015f94c7"
-  integrity sha512-pkWdpSeZfYKJUgBxsB03D9335a0JAe/WM1fbT7RFmkybgXbcuT5tbfx/6dCZiFHSq/QzzPtEs1EFj0RSuB7yPg==
+common-types@^1.14.10:
+  version "1.14.10"
+  resolved "https://registry.yarnpkg.com/common-types/-/common-types-1.14.10.tgz#68ad7e8c62664ace249584894e909793a5f7671a"
+  integrity sha512-dnB1pNRZv/cdmomIESjC2V/vz7pv3zpOu5rJN5/CkvR56/y1NCSNgHZXV1NqlzfKvuD+13H285gAOke50x4/Pw==
   dependencies:
     "@types/json-schema" "^7.0.4"
 

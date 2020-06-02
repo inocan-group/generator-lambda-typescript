@@ -10,6 +10,7 @@ function askAboutTesting(defaults) {
             message: "What test framework will you use (mocha/chai is recommended):",
             choices: [do_devops_1.UnitTestFramework.mocha, do_devops_1.UnitTestFramework.jest, do_devops_1.UnitTestFramework.other],
             default: () => defaults.unitTesting ? defaults.unitTesting : do_devops_1.hasDevDependency("jest") ? "jest" : do_devops_1.UnitTestFramework.mocha,
+            when: !defaults.unitTesting,
         }),
         private_1.listQuestion({
             name: "testFilePattern",

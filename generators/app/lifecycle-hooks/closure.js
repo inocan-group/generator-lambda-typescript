@@ -20,7 +20,7 @@ function closure(ctx) {
         try {
             const checkIsRepo = yield git.checkIsRepo();
             if (checkIsRepo) {
-                console.log(chalk `{grey - This project was already setup as a git repo; will leave {bold git} to you.}`);
+                console.log(chalk `{grey - This project was already setup as a git repo.}`);
             }
             else {
                 console.log(chalk `{grey - this project has {italic not yet} been setup as a git repository yet ... will setup}`);
@@ -49,7 +49,7 @@ function closure(ctx) {
             console.log(`\n{grey ${e.stack}\n`);
             console.log(chalk `- anyway, outside of the {bold git} fumble, all else is well :)`);
         }
-        console.log(yosay(`\n${chalk.bold("Success!")}\nType "yarn help" for CLI help.`));
+        console.log(yosay(chalk `\n{green {bold Success!}}\nType "yarn do" for CLI help.`));
     });
 }
 exports.closure = closure;

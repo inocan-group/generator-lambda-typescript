@@ -9,22 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.writing = void 0;
-const private_1 = require("../private");
-const shared_1 = require("../shared");
-function writing(ctx) {
+exports.copyFile = void 0;
+const path_1 = require("path");
+/**
+ * Copies a file from source to destination; files should be specified with
+ * path from root.
+ *
+ * @param ctx an instance of the Generator
+ * @param file the filename (and any path needed to get there)
+ */
+function copyFile(ctx, file, options = {}) {
     return __awaiter(this, void 0, void 0, function* () {
-        const firstTime = !shared_1.destinationExists(ctx, "src/handlers");
-        return Promise.all([
-            private_1.rootConfig(ctx),
-            // SRC
-            private_1.srcHandlers(ctx, firstTime),
-            private_1.srcModels(ctx, firstTime),
-            private_1.srcShared(ctx, firstTime),
-            private_1.srcTypes(ctx, firstTime),
-            // SERVERLESS CONFIG
-            private_1.serverlessStaticConfig(ctx),
-        ]);
+        const source = path_1.join(ctx.sourceRoot(), file);
+        const destination = path_1.join(ctx.destinationRoot(), file);
+        ctx.fs.copy(source, destination, options);
     });
 }
-exports.writing = writing;
+exports.copyFile = copyFile;

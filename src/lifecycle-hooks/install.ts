@@ -14,7 +14,18 @@ const serverlessDevDeps = [
 const webpackRelated = ["webpack", "webpack-bundle-analyzer", "webpack-cli"];
 const mocha = ["mocha", "chai", "@types/mocha", "@types/chai"];
 const jest = ["jest"];
-const otherDevDeps = ["js-yaml", "do-devops", "typescript", "ts-node", "eslint", "rimraf", "chalk", "netlify", "madge"];
+const otherDevDeps = [
+  "js-yaml",
+  "@types/js-yaml",
+  "do-devops",
+  "typescript",
+  "ts-node",
+  "eslint",
+  "rimraf",
+  "chalk",
+  "netlify",
+  "madge",
+];
 //#endregion
 
 //#region deps
