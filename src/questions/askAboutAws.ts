@@ -66,7 +66,8 @@ export function askAboutAws(defaults: IDictionary, profiles: IDictionary<IAwsPro
           current.awsProfile || current._awsProfile
         }" in your credentials file,\ndo you have the {italic access} and {italic secret key} available? If so we can add it to your file\nfor you.`,
       when: (current) =>
-        (current.repoType === "utility-library" &&
+        (current._awsProfile !== "NONE" &&
+          current.repoType === "utility-library" &&
           current._awsProfile &&
           !profileNames.includes(current._awsProfile)) ||
         (current.repoType === "core-services" && current.awsProfile && !profileNames.includes(current.awsProfile)),

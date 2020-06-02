@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "prep": "yarn do build",
-    "build": "yarn do build",
+    "build": "yarn ts-node serverless-config/build.ts",
     "fns": "yarn do fns",
     "ssm": "yarn do ssm",
     "autoindex": "yarn do autoindex",

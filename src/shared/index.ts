@@ -1,7 +1,7 @@
 // #autoindex:named
 
 //#region autoindexed files
-// indexed at: 6th Jun, 2020, 10:12 PM ( GMT-7 )
+// indexed at: 6th Jun, 2020, 07:10 AM ( GMT-7 )
 export * from "./computer-text";
 export * from "./copyDirectory";
 export * from "./copyFile";

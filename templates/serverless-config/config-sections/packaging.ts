@@ -1,23 +1,9 @@
-import {
-  IServerlessPackage,
-  IServerlessAccountInfo,
-  IPackageJson
-} from "common-types";
-import { readFileSync } from "fs";
-import { join } from "path";
+import { IServerlessAccountInfo, IServerlessPackage } from "common-types";
 
-export const packaging: (
-  config: IServerlessAccountInfo
-) => { package: IServerlessPackage } = config => {
-  const devDeps = Object.keys(
-    (JSON.parse(
-      readFileSync(join(process.cwd(), "package.json"), { encoding: "utf-8" })
-    ) as IPackageJson).devDependencies
-  );
-
-  if (devDeps.includes("webpack") && !devDeps.includes("serverless-webpack")) {
+export const packaging = (config: IServerlessAccountInfo): { package: IServerlessPackage } => {
+  if (config.devDependencies.includes("webpack") && !config.devDependencies.includes("serverless-webpack")) {
     return { package: webpackConfig };
-  } else if (devDeps.includes("serverless-webpack")) {
+  } else if (config.devDependencies.includes("serverless-webpack")) {
     return { package: serverlessWebpackConfig };
   } else {
     return { package: defaultConfig };
@@ -35,7 +21,7 @@ const webpackConfig: IServerlessPackage = {
    * global level we're just reducing down to the set of .webpack files
    */
   exclude: [],
-  include: [".webpack/**"]
+  include: [".webpack/**"],
 };
 
 /**
@@ -45,7 +31,7 @@ const serverlessWebpackConfig: IServerlessPackage = {
   /** not needed because node_modules deps have been rolled in */
   excludeDevDependencies: true,
   /** the only file we need is the handler function */
-  exclude: [".git/**", ".serverless/**", "src/**", "test/**"]
+  exclude: [".git/**", ".serverless/**", "src/**", "test/**"],
 };
 
 /**
@@ -53,5 +39,5 @@ const serverlessWebpackConfig: IServerlessPackage = {
  */
 const defaultConfig: IServerlessPackage = {
   excludeDevDependencies: true,
-  exclude: [".git/**", ".serverless/**", "test/**"]
+  exclude: [".git/**", ".serverless/**", "test/**"],
 };

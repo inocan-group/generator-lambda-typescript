@@ -22,18 +22,24 @@ import { IDictionary } from "common-types";
 import { getAwsProfileList } from "do-devops";
 
 import chalk = require("chalk");
+import inquirer = require("inquirer");
 
 export async function prompting(ctx: Generator) {
   const config = ctx.config.getAll();
   const awsProfiles = await getAwsProfileList();
-  const answers = await ctx.prompt([
-    ...askForNameAndDescription({ ...config, guessedName: ctx.determineAppname() }),
-    ...askAboutTesting(config),
-    askAboutDatabase(config),
-    askAboutLicense(config),
-    ...askAboutRepo(config),
-    ...askAboutAws(config, awsProfiles || {}),
-  ]);
+  let answers: inquirer.Answers;
+  try {
+    answers = await ctx.prompt([
+      ...askForNameAndDescription({ ...config, guessedName: ctx.determineAppname() }),
+      ...askAboutTesting(config),
+      askAboutDatabase(config),
+      askAboutLicense(config),
+      ...askAboutRepo(config),
+      ...askAboutAws(config, awsProfiles || {}),
+    ]);
+  } catch (e) {
+    process.exit();
+  }
 
   // save repo-state
   Object.keys(answers)
