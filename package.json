@@ -1,6 +1,6 @@
 {
   "name": "generator-lambda-typescript",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A template for using AWS Lambda in Typescript with Opinionated Tools",
   "main": "generators/app/index.js",
   "type": "commonjs",
@@ -19,7 +19,8 @@
     "watch:templates": "sync-glob --watch 'templates' 'generators/app/templates'",
     "watch:tsc": "tsc -P tsconfig.cjs.json -w",
     "test": "do test",
-    "autoindex": "yarn do autoindex"
+    "autoindex": "yarn do autoindex",
+    "circular": "yarn madge --circular src/**/*.ts"
   },
   "repository": {
     "type": "git",
