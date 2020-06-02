@@ -4,7 +4,7 @@ import { Generator } from "../private";
 import { UnitTestFramework } from "do-devops";
 
 //#region dev-deps
-const utilityDevDeps = ["rimraf", "chalk", "@types/rimraf", "@types/chalk"];
+const utilityDevDeps = ["rimraf", "chalk", "@types/rimraf", "@types/chalk", "fx", "madge"];
 const serverlessDevDeps = [
   "serverless",
   "serverless-pseudo-parameters",

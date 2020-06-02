@@ -19,7 +19,8 @@
     "watch:templates": "sync-glob --watch 'templates' 'generators/app/templates'",
     "watch:tsc": "tsc -P tsconfig.cjs.json -w",
     "test": "do test",
-    "autoindex": "yarn do autoindex"
+    "autoindex": "yarn do autoindex",
+    "circular": "yarn madge --circular src/**/*.ts"
   },
   "repository": {
     "type": "git",
