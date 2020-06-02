@@ -20,17 +20,28 @@ class Generator extends YeomanGenerator {
     initializing() {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(private_1.computerText);
-            console.log(chalk `\nStarting the {green Lambda Typescript} generator. {italic For AWS functions with attitude!}\n`);
-            const answers = yield this.prompt([
-                private_1.askForProjectName(this.config.getAll()),
-                ...private_1.askAboutTesting(this.config.getAll()),
-            ]);
-            Object.keys(answers).forEach((key) => this.config.set(key, answers[key]));
-            this.config.save();
+            console.log(chalk `\nStarting the {green Lambda Typescript} generator. {italic AWS functions with attitude!}\n`);
+        });
+    }
+    prompting() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield private_1.prompting(this);
+        });
+    }
+    writing() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield private_1.writing(this);
         });
     }
     install() {
-        private_1.install(this);
+        return __awaiter(this, void 0, void 0, function* () {
+            yield private_1.install(this);
+        });
+    }
+    end() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield private_1.closure(this);
+        });
     }
 }
 exports.Generator = Generator;

@@ -1,17 +1,17 @@
-import { getPackageJson, hasDevDependency } from "do-devops";
-import { inputQuestion, listQuestion } from "../../private";
+import { UnitTestFramework, hasDevDependency } from "do-devops";
 
 import { IDictionary } from "common-types";
-
-import inquirer = require("inquirer");
+import { listQuestion } from "../private";
 
 export function askAboutTesting(defaults: IDictionary) {
   return [
     listQuestion({
-      name: "testFramework",
+      name: "unitTesting",
       message: "What test framework will you use (mocha/chai is recommended):",
-      choices: ["mocha/chai", "jest", "ava", "other"],
-      default: defaults.testFramework || hasDevDependency("jest") ? "jest" : "mocha/chai",
+      choices: [UnitTestFramework.mocha, UnitTestFramework.jest, UnitTestFramework.other],
+      default: () =>
+        defaults.unitTesting ? defaults.unitTesting : hasDevDependency("jest") ? "jest" : UnitTestFramework.mocha,
+      when: !defaults.unitTesting,
     }),
     listQuestion({
       name: "testFilePattern",
@@ -24,7 +24,7 @@ export function askAboutTesting(defaults: IDictionary) {
         "src/**/*-spec.ts",
         "src/**/*.spec.ts",
       ],
-      default: defaults.testFilePattern || "test/**/*-spec.ts",
+      default: () => defaults.testFilePattern || "test/**/*-spec.ts",
       when: !defaults.testFilePattern,
     }),
   ];

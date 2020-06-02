@@ -1,0 +1,11 @@
+node_modules/
+npm-debug.log
+yarn-error.log
+.nyc_output
+lib_test
+.rpt2_cache/
+.serverless/
+.vagrant/
+serverless-package/
+.webpack/*
+.yo-transient.json
