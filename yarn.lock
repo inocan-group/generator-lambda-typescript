@@ -1422,10 +1422,10 @@ common-types@^1.12.12, common-types@^1.14.4:
   dependencies:
     "@types/json-schema" "^7.0.4"
 
-common-types@^1.14.10:
-  version "1.14.10"
-  resolved "https://registry.yarnpkg.com/common-types/-/common-types-1.14.10.tgz#68ad7e8c62664ace249584894e909793a5f7671a"
-  integrity sha512-dnB1pNRZv/cdmomIESjC2V/vz7pv3zpOu5rJN5/CkvR56/y1NCSNgHZXV1NqlzfKvuD+13H285gAOke50x4/Pw==
+common-types@^1.15.0:
+  version "1.15.8"
+  resolved "https://registry.yarnpkg.com/common-types/-/common-types-1.15.8.tgz#7a7f826156eb9ff49f2aaa2109175696560d883c"
+  integrity sha512-xRp6QrwBt+sUvMw95zpzXKkt3lKHhF11FsrqclHFOz/rvvVMU/qJUNph1g+wVKVJhEEIoIfeFaav6ouu1gOK4w==
   dependencies:
     "@types/json-schema" "^7.0.4"
 
@@ -3559,9 +3559,9 @@ lodash.union@^4.6.0:
   integrity sha1-SLtQiECfFvGCFmZkHETdGqrjzYg=
 
 lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 log-symbols@3.0.0, log-symbols@^3.0.0:
   version "3.0.0"
