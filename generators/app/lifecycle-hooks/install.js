@@ -13,7 +13,7 @@ exports.install = void 0;
 const questions_1 = require("../questions");
 const do_devops_1 = require("do-devops");
 //#region dev-deps
-const utilityDevDeps = ["rimraf", "chalk", "@types/rimraf", "@types/chalk"];
+const utilityDevDeps = ["rimraf", "chalk", "@types/rimraf", "@types/chalk", "js-yaml", "@types/js-yaml", "fx", "madge"];
 const serverlessDevDeps = [
     "serverless",
     "serverless-pseudo-parameters",
@@ -22,7 +22,7 @@ const serverlessDevDeps = [
 ];
 const webpackRelated = ["webpack", "webpack-bundle-analyzer", "webpack-cli"];
 const mocha = ["mocha", "chai", "@types/mocha", "@types/chai"];
-const jest = ["jest"];
+const jest = ["jest", "ts-jest", "jest-babel", "jest-extended", "@types/jest"];
 const otherDevDeps = [
     "js-yaml",
     "@types/js-yaml",
