@@ -4,7 +4,7 @@ import { Generator } from "../private";
 import { UnitTestFramework } from "do-devops";
 
 //#region dev-deps
-const utilityDevDeps = ["rimraf", "chalk", "@types/rimraf", "@types/chalk", "fx", "madge"];
+const utilityDevDeps = ["rimraf", "chalk", "@types/rimraf", "@types/chalk", "js-yaml", "@types/js-yaml", "fx", "madge"];
 const serverlessDevDeps = [
   "serverless",
   "serverless-pseudo-parameters",
@@ -13,7 +13,7 @@ const serverlessDevDeps = [
 ];
 const webpackRelated = ["webpack", "webpack-bundle-analyzer", "webpack-cli"];
 const mocha = ["mocha", "chai", "@types/mocha", "@types/chai"];
-const jest = ["jest"];
+const jest = ["jest", "ts-jest", "jest-babel", "jest-extended", "@types/jest"];
 const otherDevDeps = [
   "js-yaml",
   "@types/js-yaml",
