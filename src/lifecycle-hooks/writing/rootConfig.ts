@@ -25,7 +25,11 @@ export async function rootConfig(ctx: Generator) {
   }
 
   const WALLABY =
-    config.unitTesting === UnitTestFramework.mocha ? "wallaby-mocha.js" : "wallaby-jest.js";
+    config.unitTesting === UnitTestFramework.mocha
+      ? "wallaby.mocha.js"
+      : config.unitTesting === UnitTestFramework.jest
+      ? "wallaby.jest.js"
+      : false;
 
   /**
    * Configuration files to copy
@@ -36,7 +40,7 @@ export async function rootConfig(ctx: Generator) {
     }
   );
   // Wallaby config
-  ctx.fs.copy(ctx.templatePath(WALLABY), ctx.destinationPath("wallaby.js"));
+  if (WALLABY) ctx.fs.copy(ctx.templatePath(WALLABY), ctx.destinationPath("wallaby.js"));
 
   if (config.license === License.MIT && !ctx.fs.exists(ctx.destinationPath("LICENSE"))) {
     const year = format(new Date(), "yyyy");

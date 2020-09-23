@@ -27,7 +27,11 @@ function rootConfig(ctx) {
                     ? `"docs": "vitepress docs",\n"docs:build": "vitepress build docs",\n`
                     : "" }));
         }
-        const WALLABY = config.unitTesting === do_devops_1.UnitTestFramework.mocha ? "wallaby-mocha.js" : "wallaby-jest.js";
+        const WALLABY = config.unitTesting === do_devops_1.UnitTestFramework.mocha
+            ? "wallaby.mocha.js"
+            : config.unitTesting === do_devops_1.UnitTestFramework.jest
+                ? "wallaby.jest.js"
+                : false;
         /**
          * Configuration files to copy
          */
@@ -35,7 +39,8 @@ function rootConfig(ctx) {
             ctx.fs.copy(ctx.templatePath(f), ctx.destinationPath(returnDot(f)), { dot: true });
         });
         // Wallaby config
-        ctx.fs.copy(ctx.templatePath(WALLABY), ctx.destinationPath("wallaby.js"));
+        if (WALLABY)
+            ctx.fs.copy(ctx.templatePath(WALLABY), ctx.destinationPath("wallaby.js"));
         if (config.license === "MIT" /* MIT */ && !ctx.fs.exists(ctx.destinationPath("LICENSE"))) {
             const year = date_fns_1.format(new Date(), "yyyy");
             ctx.fs.copyTpl(ctx.templatePath("LICENSE"), ctx.destinationPath("LICENSE"), { year });
