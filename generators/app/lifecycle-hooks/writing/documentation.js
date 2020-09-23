@@ -9,25 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.writing = void 0;
-const private_1 = require("../private");
-const shared_1 = require("../shared");
-const documentation_1 = require("./writing/documentation");
-function writing(ctx) {
+exports.documentation = void 0;
+const private_1 = require("../../private");
+function documentation(ctx) {
     return __awaiter(this, void 0, void 0, function* () {
-        const firstTime = !shared_1.destinationExists(ctx, "src/handlers");
-        return Promise.all([
-            private_1.rootConfig(ctx),
-            // SRC
-            private_1.srcHandlers(ctx, firstTime),
-            private_1.srcModels(ctx, firstTime),
-            private_1.srcShared(ctx, firstTime),
-            private_1.srcTypes(ctx, firstTime),
-            // SERVERLESS CONFIG
-            private_1.serverlessStaticConfig(ctx),
-            // DOCUMENTATION
-            documentation_1.documentation(ctx),
-        ]);
+        const config = ctx.config.getAll();
+        const hasDocsDir = private_1.destinationExists(ctx, "docs");
+        if (!hasDocsDir && config.documentation) {
+            const dictionary = {
+                year: new Date().getFullYear(),
+                name: config.serviceName,
+                organization: config.repoOrg,
+                repo: config.repoUrl,
+            };
+            private_1.copyTplDirectory(ctx, "docs/.vitepress", dictionary);
+            private_1.copyTplDirectory(ctx, "docs", dictionary);
+        }
     });
 }
-exports.writing = writing;
+exports.documentation = documentation;

@@ -4,9 +4,10 @@ exports.askAboutRepo = exports.USER_REPO_ORGS = void 0;
 const private_1 = require("../private");
 const do_devops_1 = require("do-devops");
 exports.USER_REPO_ORGS = ".repo-orgs.json";
-function askAboutRepo(defaults) {
-    const userFile = do_devops_1.getFileFromHomeDirectory(exports.USER_REPO_ORGS, true);
-    const userOrgs = userFile ? JSON.parse(userFile) : [];
+function askAboutRepo(defaults, repoOrg) {
+    const userRepoOrgs = do_devops_1.getFileFromHomeDirectory(exports.USER_REPO_ORGS, true);
+    const userOrgs = userRepoOrgs ? Array.from(new Set(JSON.parse(userRepoOrgs))) : [];
+    const orgs = repoOrg ? [repoOrg].concat(...userOrgs) : userOrgs;
     return [
         private_1.listQuestion({
             name: "repoHost",
@@ -21,7 +22,9 @@ function askAboutRepo(defaults) {
                     }
                 }
                 catch (e) {
-                    return defaults.repoHost || defaults.license === "Proprietary" /* Proprietary */ ? "bitbucket" /* bitbucket */ : "github" /* github */;
+                    return defaults.repoHost || defaults.license === "UNLICENSED" /* UNLICENSED */
+                        ? "bitbucket" /* bitbucket */
+                        : "github" /* github */;
                 }
                 return pkgJson.repository.includes("github")
                     ? "github" /* github */
@@ -34,8 +37,8 @@ function askAboutRepo(defaults) {
         private_1.listQuestion({
             name: "repoOrg",
             message: "What organization/group will your repo be under:",
-            choices: userOrgs.concat("OTHER"),
-            when: !defaults.repoOrg && userOrgs.length > 0,
+            choices: orgs,
+            when: !defaults.repoOrg && orgs.length > 0,
         }),
         private_1.inputQuestion({
             name: "repoOrg",
@@ -46,7 +49,9 @@ function askAboutRepo(defaults) {
         private_1.inputQuestion({
             name: "repoUrl",
             message: "Please validate that this is the right URL for your repo",
-            default: (current) => do_devops_1.getPackageJson().repository ? do_devops_1.getPackageJson().repository : private_1.repoUrl(Object.assign(Object.assign({}, defaults), current)),
+            default: (current) => do_devops_1.getPackageJson().repository
+                ? do_devops_1.getPackageJson().repository
+                : private_1.repoUrl(Object.assign(Object.assign({}, defaults), current)),
             when: (current) => current.repoOrg !== defaults.repoOrg || current.repoHost !== defaults.repoHost,
         }),
     ];

@@ -4,12 +4,20 @@ import { Generator } from "../private";
 import { UnitTestFramework } from "do-devops";
 
 //#region dev-deps
-const utilityDevDeps = ["rimraf", "chalk", "@types/rimraf", "@types/chalk", "js-yaml", "@types/js-yaml", "fx", "madge"];
+const utilityDevDeps = [
+  "rimraf",
+  "chalk",
+  "@types/rimraf",
+  "@types/chalk",
+  "js-yaml",
+  "@types/js-yaml",
+  "fx",
+  "madge",
+];
 const serverlessDevDeps = [
   "serverless",
   "serverless-pseudo-parameters",
   "serverless-step-functions",
-  "serverless-log-forwarding",
 ];
 const webpackRelated = ["webpack", "webpack-bundle-analyzer", "webpack-cli"];
 const mocha = ["mocha", "chai", "@types/mocha", "@types/chai"];
@@ -35,11 +43,22 @@ const serverlessDeps = ["aws-orchestrate", "aws-log", "aws-ssm"];
 
 export async function install(ctx: Generator) {
   const config = ctx.config.getAll();
-  const testing = (config.unitTesting = UnitTestFramework.mocha
-    ? mocha
-    : (config.unitTesting = UnitTestFramework.jest ? jest : []));
+  const docDeps = config.documentation ? ["vitepress"] : [];
+  const testing =
+    config.unitTesting === UnitTestFramework.mocha
+      ? mocha
+      : config.unitTesting === UnitTestFramework.jest
+      ? jest
+      : [];
 
-  const devDeps = [...utilityDevDeps, ...serverlessDevDeps, ...webpackRelated, ...testing, ...otherDevDeps];
+  const devDeps = [
+    ...utilityDevDeps,
+    ...serverlessDevDeps,
+    ...webpackRelated,
+    ...testing,
+    ...otherDevDeps,
+    ...docDeps,
+  ];
   ctx.yarnInstall(devDeps, { dev: true });
 
   const deps = [...utilityDeps, ...serverlessDeps];

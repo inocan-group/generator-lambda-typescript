@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "prep": "yarn do build",
+    <%= docsScript %>
     "build": "yarn ts-node serverless-config/build.ts",
     "fns": "yarn do fns",
     "ssm": "yarn do ssm",
@@ -25,6 +26,11 @@
     "help": "yarn do --help",
     "coverage:coveralls": "nyc --reporter=text-lcov _mocha -r ts-node/register 'test/**/*-spec.ts' | coveralls",
     "coverage:codecov": "nyc _mocha --reporter=json -r ts-node/register 'test/**/*-spec.ts' > coverage/coverage.json",
+    "circular": "yarn madge src --extensions ts --circular",
+    "orphans": "yarn madge src --extensions ts --orphans",
+    "leaves": "yarn madge src --extensions ts --leaves",
+    "warnings": "yarn madge src --extensions ts --warnings",
+    "summary": "yarn madge src --extensions ts --summary",
     "watch": "webpack -w"
   },
   "devDependencies": {

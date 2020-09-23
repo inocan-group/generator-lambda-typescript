@@ -7,7 +7,7 @@ function askAboutLicense(defaults) {
     return private_1.listQuestion({
         name: "license",
         message: "What license should this package operate under?",
-        choices: ["Proprietary" /* Proprietary */, "MIT" /* MIT */, "BSD" /* BSD */, "Apache" /* Apache */, "GNU" /* GNU */],
+        choices: ["UNLICENSED" /* UNLICENSED */, "MIT" /* MIT */, "BSD" /* BSD */, "Apache" /* Apache */, "GNU" /* GNU */],
         default: defaults.license || do_devops_1.getPackageJson().license || "MIT" /* MIT */,
         when: !do_devops_1.getPackageJson().license,
     });
