@@ -7,6 +7,7 @@ import {
   askForNameAndDescription,
   getTransientState,
   setTransientState,
+  askAboutDocumentation,
 } from "../private";
 import {
   IAwsProfile,
@@ -15,6 +16,7 @@ import {
   getAwsIdentityFromProfile,
   getFileFromHomeDirectory,
   saveFileToHomeDirectory,
+  findOrgFromGitRemote,
 } from "do-devops";
 import { USER_REPO_ORGS, askAboutAws } from "../questions";
 
@@ -27,14 +29,16 @@ import inquirer = require("inquirer");
 export async function prompting(ctx: Generator) {
   const config = ctx.config.getAll();
   const awsProfiles = await getAwsProfileList();
+  const repoOrg = await findOrgFromGitRemote();
   let answers: inquirer.Answers;
   try {
     answers = await ctx.prompt([
       ...askForNameAndDescription({ ...config, guessedName: ctx.determineAppname() }),
       ...askAboutTesting(config),
       askAboutDatabase(config),
+      askAboutDocumentation(config),
       askAboutLicense(config),
-      ...askAboutRepo(config),
+      ...askAboutRepo(config, repoOrg),
       ...askAboutAws(config, awsProfiles || {}),
     ]);
   } catch (e) {
@@ -67,7 +71,9 @@ export async function prompting(ctx: Generator) {
       ctx.config.set("awsAccount", identity.accountId);
       ctx.config.save();
     } catch (e) {
-      console.log(chalk`- there was a {red problem} using the AWS {italic credentials} you passed in!`);
+      console.log(
+        chalk`- there was a {red problem} using the AWS {italic credentials} you passed in!`
+      );
       console.log(chalk`- error was: {grey ${e.message}}`);
 
       console.log(

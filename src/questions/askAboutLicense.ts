@@ -8,14 +8,14 @@ export const enum License {
   BSD = "BSD",
   Apache = "Apache",
   GNU = "GNU",
-  Proprietary = "Proprietary",
+  UNLICENSED = "UNLICENSED",
 }
 
 export function askAboutLicense(defaults: IDictionary) {
   return listQuestion({
     name: "license",
     message: "What license should this package operate under?",
-    choices: [License.Proprietary, License.MIT, License.BSD, License.Apache, License.GNU],
+    choices: [License.UNLICENSED, License.MIT, License.BSD, License.Apache, License.GNU],
     default: defaults.license || getPackageJson().license || License.MIT,
     when: !getPackageJson().license,
   });

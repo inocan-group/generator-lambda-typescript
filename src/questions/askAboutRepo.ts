@@ -1,6 +1,6 @@
 import { IDictionary, IPackageJson } from "common-types";
 import { License, inputQuestion, listQuestion, repoUrl } from "../private";
-import { getFileFromHomeDirectory, getPackageJson } from "do-devops";
+import { getFileFromHomeDirectory, getPackageJson, findOrgFromGitRemote } from "do-devops";
 
 export const enum GitHost {
   github = "github",
@@ -11,9 +11,10 @@ export const enum GitHost {
 
 export const USER_REPO_ORGS = ".repo-orgs.json";
 
-export function askAboutRepo(defaults: IDictionary) {
-  const userFile = getFileFromHomeDirectory(USER_REPO_ORGS, true);
-  const userOrgs = userFile ? JSON.parse(userFile) : [];
+export function askAboutRepo(defaults: IDictionary, repoOrg: string | false) {
+  const userRepoOrgs = getFileFromHomeDirectory(USER_REPO_ORGS, true);
+  const userOrgs = userRepoOrgs ? Array.from(new Set<string>(JSON.parse(userRepoOrgs))) : [];
+  const orgs = repoOrg ? [repoOrg].concat(...userOrgs) : userOrgs;
 
   return [
     listQuestion({
@@ -28,7 +29,9 @@ export function askAboutRepo(defaults: IDictionary) {
             throw new Error("no respository property to work off of");
           }
         } catch (e) {
-          return defaults.repoHost || defaults.license === License.Proprietary ? GitHost.bitbucket : GitHost.github;
+          return defaults.repoHost || defaults.license === License.UNLICENSED
+            ? GitHost.bitbucket
+            : GitHost.github;
         }
 
         return pkgJson.repository.includes("github")
@@ -42,8 +45,8 @@ export function askAboutRepo(defaults: IDictionary) {
     listQuestion({
       name: "repoOrg",
       message: "What organization/group will your repo be under:",
-      choices: userOrgs.concat("OTHER"),
-      when: !defaults.repoOrg && userOrgs.length > 0,
+      choices: orgs,
+      when: !defaults.repoOrg && orgs.length > 0,
     }),
     inputQuestion({
       name: "repoOrg",
@@ -55,8 +58,11 @@ export function askAboutRepo(defaults: IDictionary) {
       name: "repoUrl",
       message: "Please validate that this is the right URL for your repo",
       default: (current: IDictionary) =>
-        getPackageJson().repository ? getPackageJson().repository : repoUrl({ ...defaults, ...current }),
-      when: (current) => current.repoOrg !== defaults.repoOrg || current.repoHost !== defaults.repoHost,
+        getPackageJson().repository
+          ? getPackageJson().repository
+          : repoUrl({ ...defaults, ...current }),
+      when: (current) =>
+        current.repoOrg !== defaults.repoOrg || current.repoHost !== defaults.repoHost,
     }),
   ];
 }

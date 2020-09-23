@@ -13,12 +13,20 @@ exports.install = void 0;
 const questions_1 = require("../questions");
 const do_devops_1 = require("do-devops");
 //#region dev-deps
-const utilityDevDeps = ["rimraf", "chalk", "@types/rimraf", "@types/chalk", "js-yaml", "@types/js-yaml", "fx", "madge"];
+const utilityDevDeps = [
+    "rimraf",
+    "chalk",
+    "@types/rimraf",
+    "@types/chalk",
+    "js-yaml",
+    "@types/js-yaml",
+    "fx",
+    "madge",
+];
 const serverlessDevDeps = [
     "serverless",
     "serverless-pseudo-parameters",
     "serverless-step-functions",
-    "serverless-log-forwarding",
 ];
 const webpackRelated = ["webpack", "webpack-bundle-analyzer", "webpack-cli"];
 const mocha = ["mocha", "chai", "@types/mocha", "@types/chai"];
@@ -43,10 +51,20 @@ const serverlessDeps = ["aws-orchestrate", "aws-log", "aws-ssm"];
 function install(ctx) {
     return __awaiter(this, void 0, void 0, function* () {
         const config = ctx.config.getAll();
-        const testing = (config.unitTesting = do_devops_1.UnitTestFramework.mocha
+        const docDeps = config.documentation ? ["vitepress"] : [];
+        const testing = config.unitTesting === do_devops_1.UnitTestFramework.mocha
             ? mocha
-            : (config.unitTesting = do_devops_1.UnitTestFramework.jest ? jest : []));
-        const devDeps = [...utilityDevDeps, ...serverlessDevDeps, ...webpackRelated, ...testing, ...otherDevDeps];
+            : config.unitTesting === do_devops_1.UnitTestFramework.jest
+                ? jest
+                : [];
+        const devDeps = [
+            ...utilityDevDeps,
+            ...serverlessDevDeps,
+            ...webpackRelated,
+            ...testing,
+            ...otherDevDeps,
+            ...docDeps,
+        ];
         ctx.yarnInstall(devDeps, { dev: true });
         const deps = [...utilityDeps, ...serverlessDeps];
         if (config.database === questions_1.DbTech.firestore || config.database === questions_1.DbTech.rtdb) {

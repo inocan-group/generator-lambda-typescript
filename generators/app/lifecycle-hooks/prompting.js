@@ -19,14 +19,16 @@ function prompting(ctx) {
     return __awaiter(this, void 0, void 0, function* () {
         const config = ctx.config.getAll();
         const awsProfiles = yield do_devops_2.getAwsProfileList();
+        const repoOrg = yield do_devops_1.findOrgFromGitRemote();
         let answers;
         try {
             answers = yield ctx.prompt([
                 ...private_1.askForNameAndDescription(Object.assign(Object.assign({}, config), { guessedName: ctx.determineAppname() })),
                 ...private_1.askAboutTesting(config),
                 private_1.askAboutDatabase(config),
+                private_1.askAboutDocumentation(config),
                 private_1.askAboutLicense(config),
-                ...private_1.askAboutRepo(config),
+                ...private_1.askAboutRepo(config, repoOrg),
                 ...questions_1.askAboutAws(config, awsProfiles || {}),
             ]);
         }
