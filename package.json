@@ -1,6 +1,6 @@
 {
   "name": "generator-lambda-typescript",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A template for using AWS Lambda in Typescript with Opinionated Tools",
   "main": "generators/app/index.js",
   "type": "commonjs",
