@@ -11,19 +11,50 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.documentation = void 0;
 const private_1 = require("../../private");
+const shared_1 = require("../../shared");
 function documentation(ctx) {
     return __awaiter(this, void 0, void 0, function* () {
         const config = ctx.config.getAll();
         const hasDocsDir = private_1.destinationExists(ctx, "docs");
-        if (!hasDocsDir && config.documentation) {
-            const dictionary = {
-                year: new Date().getFullYear(),
-                name: config.serviceName,
-                organization: config.repoOrg,
-                repo: config.repoUrl,
-            };
-            private_1.copyTplDirectory(ctx, "docs/.vitepress", dictionary);
-            private_1.copyTplDirectory(ctx, "docs", dictionary);
+        if (config.documentation) {
+            const dictionary = Object.assign({ year: new Date().getFullYear(), name: config.serviceName, organization: config.repoOrg, repo: config.repoUrl }, config);
+            if (!hasDocsDir) {
+                shared_1.copy("docs/getting-started/**", { isGlob: true, dictionary });
+            }
+            shared_1.buildScript("docs", `yarn ${config.documentation} serve docs`);
+            shared_1.buildScript("docs:build", `yarn ${config.documentation} build docs`);
+            switch (config.documentation) {
+                case "vitepress":
+                    yield shared_1.copy("docs/.vitepress/**", { isGlob: true, dictionary });
+                    if (!hasDocsDir) {
+                        yield shared_1.copy("docs/index-vitepress.md", {
+                            dictionary,
+                            destination: (f) => f.replace("-vitepress", ""),
+                        });
+                    }
+                    ctx.yarnInstall(["vitepress"], { dev: true });
+                    break;
+                case "vuepress":
+                    yield shared_1.copy("docs/.vuepress/**", { isGlob: true, dictionary: ctx.config });
+                    if (!hasDocsDir) {
+                        yield shared_1.copy("docs/index-vuepress.md", {
+                            dictionary,
+                            destination: (f) => f.replace("-vuepress", ""),
+                        });
+                    }
+                    ctx.yarnInstall([
+                        "vuepress",
+                        "@vuepress/back-to-top",
+                        "@vuepress/last-updated",
+                        "@vuepress/medium-zoom",
+                        "@vuepress/plugin-pwa",
+                        "vuepress-plugin-mermaidjs",
+                        "vuepress-plugin-autometa",
+                    ], { dev: true });
+                    break;
+                default:
+                    console.warn(`- The configuration expressed a desire for an unknown documentation system: ${config.documentation}. Ignoring.`);
+            }
         }
     });
 }

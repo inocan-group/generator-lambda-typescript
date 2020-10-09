@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "declaration": false,
+    "declaration": true,
     "module": "commonjs",
     "target": "es2015",
     "moduleResolution": "node",
@@ -8,6 +8,7 @@
     "outDir": "./generators/app",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
     "noEmit": true
   },
   "include": ["src/**/*.ts"]
