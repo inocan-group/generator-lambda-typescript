@@ -2,7 +2,6 @@ import { getPackageJson } from "do-devops";
 import { join } from "path";
 import { GeneratorError } from "../../errors";
 import { Generator } from "../../private";
-import { copy } from "./copy";
 
 let _buildScript: IBuildScript;
 

@@ -1,6 +1,5 @@
 import { IConfig } from "../../@types";
-import { GeneratorError } from "../../errors";
-import { Generator, copyTplDirectory, destinationExists } from "../../private";
+import { Generator, destinationExists } from "../../private";
 import { buildScript, copy } from "../../shared";
 
 export async function documentation(ctx: Generator) {
@@ -24,18 +23,22 @@ export async function documentation(ctx: Generator) {
     switch (config.documentation) {
       case "vitepress":
         await copy("docs/.vitepress/**", { isGlob: true, dictionary });
-        await copy("docs/index-vitepress.md", {
-          dictionary,
-          destination: (f) => f.replace("-vitepress", ""),
-        });
+        if (!hasDocsDir) {
+          await copy("docs/index-vitepress.md", {
+            dictionary,
+            destination: (f) => f.replace("-vitepress", ""),
+          });
+        }
         ctx.yarnInstall(["vitepress"], { dev: true });
         break;
       case "vuepress":
         await copy("docs/.vuepress/**", { isGlob: true, dictionary: ctx.config });
-        await copy("docs/index-vuepress.md", {
-          dictionary,
-          destination: (f) => f.replace("-vuepress", ""),
-        });
+        if (!hasDocsDir) {
+          await copy("docs/index-vuepress.md", {
+            dictionary,
+            destination: (f) => f.replace("-vuepress", ""),
+          });
+        }
         ctx.yarnInstall(
           [
             "vuepress",

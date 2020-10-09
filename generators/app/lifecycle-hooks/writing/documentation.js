@@ -26,18 +26,22 @@ function documentation(ctx) {
             switch (config.documentation) {
                 case "vitepress":
                     yield shared_1.copy("docs/.vitepress/**", { isGlob: true, dictionary });
-                    yield shared_1.copy("docs/index-vitepress.md", {
-                        dictionary,
-                        destination: (f) => f.replace("-vitepress", ""),
-                    });
+                    if (!hasDocsDir) {
+                        yield shared_1.copy("docs/index-vitepress.md", {
+                            dictionary,
+                            destination: (f) => f.replace("-vitepress", ""),
+                        });
+                    }
                     ctx.yarnInstall(["vitepress"], { dev: true });
                     break;
                 case "vuepress":
                     yield shared_1.copy("docs/.vuepress/**", { isGlob: true, dictionary: ctx.config });
-                    yield shared_1.copy("docs/index-vuepress.md", {
-                        dictionary,
-                        destination: (f) => f.replace("-vuepress", ""),
-                    });
+                    if (!hasDocsDir) {
+                        yield shared_1.copy("docs/index-vuepress.md", {
+                            dictionary,
+                            destination: (f) => f.replace("-vuepress", ""),
+                        });
+                    }
                     ctx.yarnInstall([
                         "vuepress",
                         "@vuepress/back-to-top",
