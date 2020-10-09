@@ -1,4 +1,4 @@
-import { Generator } from "../private";
+import { Generator } from "../Generator";
 import { IDictionary } from "common-types";
 import { join } from "path";
 import globby = require("globby");
@@ -15,5 +15,7 @@ export async function copyTplDirectory(ctx: Generator, dir: string, valueDiction
   const fqDir = join(ctx.sourceRoot(), dir);
   const files = (await globby(`${fqDir}/**/*`)).map((f) => f.replace(ctx.sourceRoot(), ""));
 
-  files.forEach((f) => ctx.fs.copyTpl(join(ctx.sourceRoot(), f), join(ctx.destinationPath(), f), valueDictionary));
+  files.forEach((f) =>
+    ctx.fs.copyTpl(join(ctx.sourceRoot(), f), join(ctx.destinationPath(), f), valueDictionary)
+  );
 }

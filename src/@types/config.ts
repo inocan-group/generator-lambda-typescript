@@ -10,7 +10,7 @@ export interface IConfig {
   awsProfile: string;
   awsRegion: string;
   database: DbTech;
-  documentation: boolean;
+  documentation: false | "vuepress" | "vitepress";
   license: License;
   unitTesting: UnitTestFramework;
   testFilePattern: string;

@@ -12,9 +12,10 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 //#region autoindexed files
-// index last changed at: 9th Sep, 2020, 06:55 PM ( GMT-7 )
+// index last changed at: 10th Oct, 2020, 10:34 AM ( GMT-7 )
 // export: named; exclusions: index, private.
 // files: computer-text, confirmQuestion, copyDirectory, copyFile, copyTplDirectory, destinationExists, getTransientState, inputQuestion, listQuestion, repoUrl, setTransientState.
+// directories: contextual.
 // local file exports
 __exportStar(require("./computer-text"), exports);
 __exportStar(require("./confirmQuestion"), exports);
@@ -27,4 +28,6 @@ __exportStar(require("./inputQuestion"), exports);
 __exportStar(require("./listQuestion"), exports);
 __exportStar(require("./repoUrl"), exports);
 __exportStar(require("./setTransientState"), exports);
+// directory exports
+__exportStar(require("./contextual/index"), exports);
 //#endregion

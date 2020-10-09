@@ -968,6 +968,11 @@ braces@^3.0.1, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
+brilliant-errors@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/brilliant-errors/-/brilliant-errors-0.1.1.tgz#e01caaf6e71bf3b2d3b26590e3cdb0d71a997329"
+  integrity sha512-wKJkCxhVtLa+f8MAlVeN6BA9p2WntCvxiHPKUOIYw3Gd+lBgKk9V81hfjm4wgbDW7vFTVi6lh5Fi+C9JuSmUWw==
+
 brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
@@ -1776,10 +1781,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-do-devops@^0.4.9:
-  version "0.4.9"
-  resolved "https://registry.yarnpkg.com/do-devops/-/do-devops-0.4.9.tgz#bdacb2b0428959322c461da8adc388ddb307c031"
-  integrity sha512-1Hhpeoh90SXcQN9VvCrodTj3bkPjGuUx5g3zgajf5ya6rgs5qTOcG2z7pjMJd3grM1fR4XBUUFqRazCyN0pwRw==
+do-devops@^0.4.10:
+  version "0.4.13"
+  resolved "https://registry.yarnpkg.com/do-devops/-/do-devops-0.4.13.tgz#03b93a791adfd53c1eba39d1214d7af6b6987790"
+  integrity sha512-5lNaMKTWBIShV1G0ifg6xlTBQlY9LsM/wBmYoOSRy7q6DobzsKopouACf5S6gUE6mgkXCxBrlAgK+T4RbrPW8A==
   dependencies:
     "@types/command-line-args" "^5.0.0"
     "@types/command-line-usage" "^5.0.1"

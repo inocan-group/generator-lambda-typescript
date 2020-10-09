@@ -8,6 +8,7 @@
     "outDir": "./generators/app",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
     "noEmit": true
   },
   "include": ["src/**/*.ts"]

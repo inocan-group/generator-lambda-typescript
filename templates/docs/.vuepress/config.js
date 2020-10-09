@@ -72,13 +72,13 @@ module.exports = {
       },
     },
     autometa: {
-      name: "Inocan Group",
+      name: "<%= organization %>",
       image: "/inocan-512x512.png",
       og: true,
       twitter: true,
       site: {
-        name: "Inocan Group",
-        twitter: "inocangroup",
+        name: "<%= organization %>",
+        twitter: "",
       },
     },
     mermaid: true,
@@ -95,7 +95,7 @@ module.exports = {
   },
   themeConfig: {
     logo: "",
-    footer: "â’¸ 2018 Inocan Group, All Rights Reserved",
+    footer: "â’¸  <%= organization %> <%= year %> to present, All Rights Reserved",
     serviceWorker: {
       updatePopup: true,
     },
