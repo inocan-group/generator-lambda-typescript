@@ -1,12 +1,16 @@
 import { IDictionary } from "common-types";
-import { confirmQuestion } from "../private";
-
-import inquirer = require("inquirer");
+import { listQuestion } from "../shared";
+import { DocumentationSolution } from "../@types";
 
 export function askAboutDocumentation(defaults: IDictionary) {
-  return confirmQuestion({
+  return listQuestion({
     name: "documentation",
-    message: "Would you like this repo to have a documentation site (using Vitepress):",
-    default: defaults.documentation || false,
+    message: "Would you like this repo to have a documentation site:",
+    choices: [
+      DocumentationSolution.NONE,
+      DocumentationSolution.vuepress,
+      DocumentationSolution.vitepress,
+    ],
+    default: defaults.documentation || DocumentationSolution.NONE,
   });
 }

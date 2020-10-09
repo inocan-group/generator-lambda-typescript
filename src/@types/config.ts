@@ -10,8 +10,14 @@ export interface IConfig {
   awsProfile: string;
   awsRegion: string;
   database: DbTech;
-  documentation: false | "vuepress" | "vitepress";
+  documentation: DocumentationSolution;
   license: License;
   unitTesting: UnitTestFramework;
   testFilePattern: string;
+}
+
+export enum DocumentationSolution {
+  NONE = "NONE",
+  vuepress = "vuepress",
+  vitepress = "vitepress",
 }
